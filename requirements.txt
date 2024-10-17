@@ -1,0 +1,13 @@
+streamlit==1.32.0
+pandas==2.2.2
+openai==1.51.2
+langchain==0.3.3
+langchain-community==0.3.2
+langchain-openai==0.2.2
+langchain-google-genai==not_installed
+langchain-text-splitters==0.3.0
+azure==not_installed
+azure-applicationinsights==not_installed
+azure-batch==not_installed
+azure-common==not_installed
+azure-core==not_installed
