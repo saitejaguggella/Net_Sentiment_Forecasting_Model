@@ -116,24 +116,25 @@ def get_conversational_chain_hypothetical_summary():
     try:
         prompt_template = """  
         
-        As an AI assistant, your task is to provide a detailed summary based on the aspect-wise sentiment and its negative review percentages, focusing on the top contributing aspects in terms of review count. Ensure that the analysis explains the percentage of negative reviews for each aspect, highlighting the reasons behind them.
+        As an AI assistant, your task is to provide a detailed summary based on the aspect-wise sentiment and its negative percentages, focusing on the top contributing aspects in terms of review count. Ensure that the analysis explains the percentage of negative reviews for each aspect, highlighting the reasons behind them.
         ## Instructions:
-        1. Summarize the reviews for the top 5 aspects with the highest review counts, clearly stating the **negative percentage** for each.
+        1. Summarize the reviews for only **top 5** aspects with the highest review counts excluding Generic aspect, clearly stating the **negative percentage** for them.
         2. Explain the **reasons** for the negative feedback for these aspects, focusing on specific points mentioned by users.
-        3. Provide a detailed breakdown of the aspects and ensure the negative summary is well-structured, with the main reasons for user **dissatisfaction highlighted** with negative percentages in the below format.
-            Format: 1.Aspect1:**Negative_Summary**
-                    2.Aspect2:**Negative_Summary**
-                    3.Aspect3:**Negative_Summary**
-                    4.Aspect4:**Negative_Summary**
-                    5.Aspect5:**Negative_Summary**
+        3. Provide a detailed breakdown of the aspects and ensure the negative summary is well-structured, with the main reasons for user **dissatisfaction highlighted** with negative percentages in the below format except for Generic Aspect.
+            Format: 1.Aspect1:**Negative_Summary, Negative Percentage**
+                    2.Aspect2:**Negative_Summary, Negative Percentage**
+                    3.Aspect3:**Negative_Summary, Negative Percentage**
+                    4.Aspect4:**Negative_Summary, Negative Percentage**
+                    5.Aspect5:**Negative_Summary, Negative Percentage**
                     Conclusion:**    **
+                    NOTE:Do not include Generic Aspect in above format, Do not mention more then 5 aspects based on highest review count
                     
         4. End with a brief conclusion summarizing the painpoints of customers in specific aspects which are having more negative percentages, indicating which areas need the most attention.
         5. When delivering the output, be confident and avoid using future tense expressions like "could be" or "may be."
          
         Context:The DataFrame contains aspect-wise review data, including sentiment scores, review counts, and calculated negative review percentages. The summary should reflect these metrics, emphasizing the negative sentiment and its causes in aspects that contribute the most to the overall review count.
         Note:**Mention the negative review percentages for top 5 aspects based on highest review count with negative summary** except Generic aspect
-              
+ 
         Context:\n {context}?\n
         Question: \n{question}\n
  
@@ -147,7 +148,6 @@ def get_conversational_chain_hypothetical_summary():
     except Exception as e:
         err = f"An error occurred while getting conversation chain for detailed review summarization: {e}"
         return err
-
 # Function to handle user queries using the existing vector store
 def hypothetical_summary(user_question, vector_store_path="faiss_index_Copilot+PC Subaspect"):
     try:
