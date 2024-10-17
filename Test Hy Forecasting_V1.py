@@ -14,8 +14,9 @@ from langchain.chains.question_answering import load_qa_chain
 df = pd.read_csv("Cleaned_Copilot+PC's_with_specs.csv")
 
 # Set environment variables for OpenAI API
-os.environ["AZURE_OPENAI_API_KEY"] = "f30dc3258be44b608d2f09e82899f1a2"
-os.environ["AZURE_OPENAI_ENDPOINT"] = "https://fordmustang.openai.azure.com/"
+os.environ['KMP_DUPLICATE_LIB_OK'] = 'TRUE'
+AZURE_OPENAI_API_KEY = os.environ.get("AZURE_OPENAI_API_KEY")
+AZURE_OPENAI_ENDPOINT = os.environ.get("AZURE_OPENAI_ENDPOINT")
 
 client = AzureOpenAI(
     api_key=os.getenv("AZURE_OPENAI_API_KEY"),  
