@@ -187,6 +187,7 @@ filtered_df_device = df[df['Device Names'] == selected_device_family]
 
 # If a Device Family is selected, show the next dropdown for Processor Generation
 if not filtered_df_device.empty:
+    st.header("Net Sentiment Forcasting Model")
     processor_generations = filtered_df_device['ProcessorGeneration_Tagged'].unique()
     selected_processor_generation = st.sidebar.selectbox("Select Processor Generation:", processor_generations)
 
